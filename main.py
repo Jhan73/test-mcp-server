@@ -8,10 +8,7 @@ from fastmcp import FastMCP
 
 mcp = FastMCP(
     name="company_db_server",
-    version="0.1.0",
-    description="A FastMCP plugin for PostgreSQL database interactions.",
-    author="Jhan",
-    author_email="jhan@gmail.com")
+    version="0.1.0")
 
 
 def get_db_connection() -> DBConnection:

@@ -26,7 +26,7 @@ services:
       DB_USER: jhan
       DB_PASSWORD: password
     ports:
-      - "30000:3000"
+      - "3000:3000"
     networks:
       - mcp-network
 networks:
