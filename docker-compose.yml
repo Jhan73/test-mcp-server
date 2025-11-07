@@ -18,10 +18,9 @@ services:
     build: .
     container_name: mcp-python-db
     depends_on:
-      postgresql:
-        condition: service_healthy
+      - postgresql
     environment:
-      DB_HOST: localhost
+      DB_HOST: postgresql
       DB_PORT: 5432
       DB_NAME: company_db
       DB_USER: jhan
