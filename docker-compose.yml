@@ -1,0 +1,37 @@
+version: '3.8'
+services:
+  postgresql:
+    image: postgres:15-alpine
+    container_name: mcp-postgresql
+    environment:
+      POSTGRES_USER: jhan
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: company_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "127.0.0.1:5432:5432"
+    networks:
+      - mcp-network
+  py-mcp-server:
+    build: .
+    container_name: mcp-python-db
+    depends_on:
+      postgresql:
+        condition: service_healthy
+    environment:
+      DB_HOST: localhost
+      DB_PORT: 5432
+      DB_NAME: company_db
+      DB_USER: jhan
+      DB_PASSWORD: password
+    ports:
+      - "30000:3000"
+    networks:
+      - mcp-network
+networks:
+  mcp-network:
+    driver: bridge
+volumes:
+  postgres_data:  
