@@ -8,7 +8,8 @@ from fastmcp import FastMCP
 
 mcp = FastMCP(
     name="company_db_server",
-    version="0.1.0")
+    version="0.1.0"
+)
 
 
 def get_db_connection() -> DBConnection:
@@ -16,7 +17,7 @@ def get_db_connection() -> DBConnection:
         dbname=os.getenv("DB_NAME", "company_db"),
         user=os.getenv("DB_USER", "user"),
         password=os.getenv("DB_PASSWORD", "password"),
-        host=os.getenv("DB_HOST", "localhost"),
+        host=os.getenv("DB_HOST", "postgresql"),
         port=os.getenv("DB_PORT", "5432"),
         cursor_factory=RealDictCursor
     )
@@ -111,7 +112,7 @@ def add_employee(name: str, position: str, department: str, salary: float) -> Di
 
 
 def main():
-    mcp.run(transport="sse", host="0.0.0.0", port=3000)
+    mcp.run(transport="http", host="0.0.0.0", port=3000, path="/mcp")
 
 
 if __name__ == "__main__":
